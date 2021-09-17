@@ -28,6 +28,43 @@
 #if canImport(UIKit)
 import UIKit
 
+@objc public enum OBJC_NVActivityIndicatorType: Int {
+    case blank
+    case ballPulse
+    case ballGridPulse
+    case ballClipRotate
+    case squareSpin
+    case ballClipRotatePulse
+    case ballClipRotateMultiple
+    case ballPulseRise
+    case ballRotate
+    case cubeTransition
+    case ballZigZag
+    case ballZigZagDeflect
+    case ballTrianglePath
+    case ballScale
+    case lineScale
+    case lineScaleParty
+    case ballScaleMultiple
+    case ballPulseSync
+    case ballBeat
+    case ballDoubleBounce
+    case lineScalePulseOut
+    case lineScalePulseOutRapid
+    case ballScaleRipple
+    case ballScaleRippleMultiple
+    case ballSpinFadeLoader
+    case lineSpinFadeLoader
+    case triangleSkewSpin
+    case pacman
+    case ballGridBeat
+    case semiCircleSpin
+    case ballRotateChase
+    case orbit
+    case audioEqualizer
+    case circleStrokeSpin
+}
+
 /**
  Enum of animation types used for activity indicator view.
 
@@ -479,6 +516,16 @@ public final class NVActivityIndicatorView: UIView {
         super.init(frame: frame)
         isHidden = true
     }
+    
+    @objc public init(frame: CGRect, type: OBJC_NVActivityIndicatorType, color: UIColor, padding: CGFloat) {
+        self.type = NVActivityIndicatorView.convertOBJCTypeToSwiftType(type)
+        self.color = color
+        self.padding = padding
+        super.init(frame: frame)
+        isHidden = true
+    }
+    
+    
 
     // Fix issue #62
     // Intrinsic content size is used in autolayout
@@ -506,7 +553,7 @@ public final class NVActivityIndicatorView: UIView {
     /**
      Start animating.
      */
-    public final func startAnimating() {
+    @objc public final func startAnimating() {
         guard !isAnimating else {
             return
         }
@@ -519,7 +566,7 @@ public final class NVActivityIndicatorView: UIView {
     /**
      Stop animating.
      */
-    public final func stopAnimating() {
+    @objc public final func stopAnimating() {
         guard isAnimating else {
             return
         }
@@ -554,6 +601,79 @@ public final class NVActivityIndicatorView: UIView {
         layer.sublayers = nil
         animationRect.size = CGSize(width: minEdge, height: minEdge)
         animation.setUpAnimation(in: layer, size: animationRect.size, color: color)
+    }
+    
+    class func convertOBJCTypeToSwiftType(_ objcType: OBJC_NVActivityIndicatorType) -> NVActivityIndicatorType {
+        switch objcType {
+        case .blank:
+            return .blank;
+        case .ballPulse:
+            return .ballPulse
+        case .ballGridPulse:
+            return .ballGridPulse
+        case .ballClipRotate:
+            return .ballClipRotate
+        case .squareSpin:
+            return .squareSpin
+        case .ballClipRotatePulse:
+            return .ballClipRotatePulse
+        case .ballClipRotateMultiple:
+            return .ballClipRotateMultiple
+        case .ballPulseRise:
+            return .ballPulseRise
+        case .ballRotate:
+            return .ballRotate
+        case .cubeTransition:
+            return .cubeTransition
+        case .ballZigZag:
+            return .ballZigZag
+        case .ballZigZagDeflect:
+            return .ballZigZagDeflect
+        case .ballTrianglePath:
+            return .ballTrianglePath
+        case .ballScale:
+            return .ballScale
+        case .lineScale:
+            return .lineScale
+        case .lineScaleParty:
+            return .lineScaleParty
+        case .ballScaleMultiple:
+            return .ballScaleMultiple
+        case .ballPulseSync:
+            return .ballPulseSync
+        case .ballBeat:
+            return .ballBeat
+        case .ballDoubleBounce:
+            return .ballDoubleBounce
+        case .lineScalePulseOut:
+            return .lineScalePulseOut
+        case .lineScalePulseOutRapid:
+            return .lineScalePulseOutRapid
+        case .ballScaleRipple:
+            return .ballScaleRipple
+        case .ballScaleRippleMultiple:
+            return .ballScaleRippleMultiple
+        case .ballSpinFadeLoader:
+            return .ballSpinFadeLoader
+        case .lineSpinFadeLoader:
+            return .lineSpinFadeLoader
+        case .triangleSkewSpin:
+            return .triangleSkewSpin
+        case .pacman:
+            return .pacman
+        case .ballGridBeat:
+            return .ballGridBeat
+        case .semiCircleSpin:
+            return .semiCircleSpin
+        case .ballRotateChase:
+            return .ballRotateChase
+        case .orbit:
+            return .orbit
+        case .audioEqualizer:
+            return .audioEqualizer
+        case .circleStrokeSpin:
+            return .circleStrokeSpin
+        }
     }
 }
 #endif
